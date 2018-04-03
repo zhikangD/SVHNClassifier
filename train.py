@@ -58,9 +58,9 @@ def _train(path_to_train_tfrecords_file, num_train_examples, path_to_val_tfrecor
                 assert tf.train.checkpoint_exists(path_to_restore_checkpoint_file), \
                     '%s not found' % path_to_restore_checkpoint_file
                 saver.restore(sess, path_to_restore_checkpoint_file)
-                print 'Model restored from file: %s' % path_to_restore_checkpoint_file
+                print ('Model restored from file: %s' % path_to_restore_checkpoint_file)
 
-            print 'Start training'
+            print ('Start training')
             patience = initial_patience
             best_accuracy = 0.0
             duration = 0.0
@@ -73,37 +73,37 @@ def _train(path_to_train_tfrecords_file, num_train_examples, path_to_val_tfrecor
                 if global_step_val % num_steps_to_show_loss == 0:
                     examples_per_sec = batch_size * num_steps_to_show_loss / duration
                     duration = 0.0
-                    print '=> %s: step %d, loss = %f (%.1f examples/sec)' % (
-                        datetime.now(), global_step_val, loss_val, examples_per_sec)
+                    print ('=> %s: step %d, loss = %f (%.1f examples/sec)' % (
+                        datetime.now(), global_step_val, loss_val, examples_per_sec))
 
                 if global_step_val % num_steps_to_check != 0:
                     continue
 
                 summary_writer.add_summary(summary_val, global_step=global_step_val)
 
-                print '=> Evaluating on validation dataset...'
+                print ('=> Evaluating on validation dataset...')
                 path_to_latest_checkpoint_file = saver.save(sess, os.path.join(path_to_train_log_dir, 'latest.ckpt'))
                 accuracy = evaluator.evaluate(path_to_latest_checkpoint_file, path_to_val_tfrecords_file,
                                               num_val_examples,
                                               global_step_val)
-                print '==> accuracy = %f, best accuracy %f' % (accuracy, best_accuracy)
+                print ('==> accuracy = %f, best accuracy %f' % (accuracy, best_accuracy))
 
                 if accuracy > best_accuracy:
                     path_to_checkpoint_file = saver.save(sess, os.path.join(path_to_train_log_dir, 'model.ckpt'),
                                                          global_step=global_step_val)
-                    print '=> Model saved to file: %s' % path_to_checkpoint_file
+                    print ('=> Model saved to file: %s' % path_to_checkpoint_file)
                     patience = initial_patience
                     best_accuracy = accuracy
                 else:
                     patience -= 1
 
-                print '=> patience = %d' % patience
+                print ('=> patience = %d' % patience)
                 if patience == 0:
                     break
 
             coord.request_stop()
             coord.join(threads)
-            print 'Finished'
+            print ('Finished')
 
 
 def main(_):
