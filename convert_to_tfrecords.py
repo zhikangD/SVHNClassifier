@@ -24,7 +24,7 @@ class ExampleReader(object):
         """
         attrs = {}
         f = digit_struct_mat_file
-        item = f['digitStruct2']['bbox'][index].item()
+        item = f['digitStruct']['bbox'][index].item()
         for key in ['label', 'left', 'top', 'width', 'height']:
             attr = f[item][key]
             values = [f[attr.value[i].item()].value[0][0]

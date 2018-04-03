@@ -50,7 +50,7 @@ class Evaluator(object):
                 restorer = tf.train.Saver()
                 restorer.restore(sess, path_to_checkpoint)
 
-                for _ in xrange(num_batches):
+                for _ in range(num_batches):
                     sess.run(update_accuracy)
 
                 accuracy_val, summary_val = sess.run([accuracy, summary])
