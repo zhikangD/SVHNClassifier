@@ -9,7 +9,7 @@ class Evaluator(object):
 
     def evaluate(self, path_to_checkpoint, path_to_tfrecords_file, num_examples, global_step):
         batch_size = 128
-        num_batches = num_examples / batch_size
+        num_batches = int(num_examples / batch_size)
         needs_include_length = False
 
         with tf.Graph().as_default():
