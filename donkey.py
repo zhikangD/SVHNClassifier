@@ -31,7 +31,7 @@ class Donkey(object):
     def build_batch(path_to_tfrecords_file, num_examples, batch_size, shuffled):
         assert tf.gfile.Exists(path_to_tfrecords_file), '%s not found' % path_to_tfrecords_file
 
-        filename_queue = tf.train.string_input_producer([path_to_tfrecords_file], num_epochs=10)
+        filename_queue = tf.train.string_input_producer([path_to_tfrecords_file], num_epochs=None)
         image, length, digits = Donkey._read_and_decode(filename_queue)
 
         min_queue_examples = int(0.4 * num_examples)
@@ -41,15 +41,12 @@ class Donkey(object):
                                                                              batch_size=batch_size,
                                                                              num_threads=1,
                                                                              capacity=min_queue_examples + 3 * batch_size,
-
-
                                                                              min_after_dequeue=min_queue_examples,
                                                                              allow_smaller_final_batch=False)
         else:
             image_batch, length_batch, digits_batch = tf.train.batch([image, length, digits],
                                                                      batch_size=batch_size,
                                                                      num_threads=1,
-                                                                     # capacity=min_queue_examples + 3 * batch_size,
-                                                                     capacity=32,
+                                                                     capacity=min_queue_examples + 3 * batch_size,
                                                                      allow_smaller_final_batch=True)
         return image_batch, length_batch, digits_batch
