@@ -83,19 +83,20 @@ def _train(path_to_train_tfrecords_file, num_train_examples, path_to_val_tfrecor
 
                 print ('=> Evaluating on validation dataset...')
                 path_to_latest_checkpoint_file = saver.save(sess, os.path.join(path_to_train_log_dir, 'latest.ckpt'))
-                accuracy = evaluator.evaluate(path_to_latest_checkpoint_file, path_to_val_tfrecords_file,
-                                              num_val_examples,
-                                              global_step_val)
-                print ('==> accuracy = %f, best accuracy %f' % (accuracy, best_accuracy))
+                print(global_step_val)
+                # accuracy = evaluator.evaluate(path_to_latest_checkpoint_file, path_to_val_tfrecords_file,
+                #                               num_val_examples,
+                #                               global_step_val)
+                # print ('==> accuracy = %f, best accuracy %f' % (accuracy, best_accuracy))
 
-                if accuracy > best_accuracy:
-                    path_to_checkpoint_file = saver.save(sess, os.path.join(path_to_train_log_dir, 'model.ckpt'),
-                                                         global_step=global_step_val)
-                    print ('=> Model saved to file: %s' % path_to_checkpoint_file)
-                    patience = initial_patience
-                    best_accuracy = accuracy
-                else:
-                    patience -= 1
+                # if accuracy > best_accuracy:
+                #     path_to_checkpoint_file = saver.save(sess, os.path.join(path_to_train_log_dir, 'model.ckpt'),
+                #                                          global_step=global_step_val)
+                #     print ('=> Model saved to file: %s' % path_to_checkpoint_file)
+                #     patience = initial_patience
+                #     best_accuracy = accuracy
+                # else:
+                patience -= 1
 
                 print ('=> patience = %d' % patience)
                 if patience == 0:
