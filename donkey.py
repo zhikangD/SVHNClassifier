@@ -40,6 +40,7 @@ class Donkey(object):
                                                                              batch_size=batch_size,
                                                                              num_threads=1,
                                                                              # capacity=min_queue_examples + 3 * batch_size,
+                                                                             capacity=32,
 
                                                                              min_after_dequeue=min_queue_examples,
                                                                              allow_smaller_final_batch=True)
@@ -48,5 +49,6 @@ class Donkey(object):
                                                                      batch_size=batch_size,
                                                                      num_threads=1,
                                                                      # capacity=min_queue_examples + 3 * batch_size,
+                                                                     capacity=32,
                                                                      allow_smaller_final_batch=True)
         return image_batch, length_batch, digits_batch
