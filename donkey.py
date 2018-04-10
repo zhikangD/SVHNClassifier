@@ -6,8 +6,8 @@ class Donkey(object):
     def _preprocess(image):
         image = tf.image.convert_image_dtype(image, dtype=tf.float32)
         image = tf.multiply(tf.subtract(image, 0.5), 2)
-        image = tf.reshape(image, [64, 64, 3])
-        image = tf.random_crop(image, [54, 54, 3])
+        image = tf.reshape(image, [128, 224, 3])
+        # image = tf.random_crop(image, [54, 54, 3])
         return image
 
     @staticmethod
