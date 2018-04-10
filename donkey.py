@@ -39,7 +39,7 @@ class Donkey(object):
         print('min_queue_examples  ', min_queue_examples)
         if shuffled:
             image_batch, length_batch, digits_batch = tf.train.shuffle_batch([image, length, digits],
-                                                                             enqueue_many=True,
+                                                                             # enqueue_many=True,
                                                                              batch_size=batch_size,
                                                                              num_threads=2,
                                                                              capacity=min_queue_examples + 3 * batch_size,
