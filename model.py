@@ -69,7 +69,7 @@ class Model(object):
             dropout = tf.layers.dropout(pool, rate=drop_rate)
             hidden8 = dropout
 
-        flatten = tf.reshape(hidden8, [-1, 4 * 4 * 192])
+        flatten = tf.reshape(hidden8, [-1, 8 * 14 * 192])
 
         with tf.variable_scope('hidden9'):
             dense = tf.layers.dense(flatten, units=3072, activation=tf.nn.relu)

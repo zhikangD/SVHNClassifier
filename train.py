@@ -107,9 +107,9 @@ def _train(path_to_train_tfrecords_file, num_train_examples, path_to_val_tfrecor
 
 
 def main(_):
-    path_to_train_tfrecords_file = os.path.join(FLAGS.data_dir, 'train.tfrecords')
-    path_to_val_tfrecords_file = os.path.join(FLAGS.data_dir, 'val.tfrecords')
-    path_to_tfrecords_meta_file = os.path.join(FLAGS.data_dir, 'meta.json')
+    path_to_train_tfrecords_file = os.path.join(FLAGS.data_dir, 'train_generate.tfrecords')
+    path_to_val_tfrecords_file = os.path.join(FLAGS.data_dir, 'val_generate.tfrecords')
+    path_to_tfrecords_meta_file = os.path.join(FLAGS.data_dir, 'meta_generate.json')
     path_to_train_log_dir = FLAGS.train_logdir
     path_to_restore_checkpoint_file = FLAGS.restore_checkpoint
     training_options = {

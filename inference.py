@@ -30,8 +30,8 @@ def main(_):
         length_predictions_val, digits_predictions_string_val = sess.run([length_predictions, digits_predictions_string])
         length_prediction_val = length_predictions_val[0]
         digits_prediction_string_val = digits_predictions_string_val[0]
-        print 'length: %d' % length_prediction_val
-        print 'digits: %s' % digits_prediction_string_val
+        print ('length: %d' % length_prediction_val)
+        print ('digits: %s' % digits_prediction_string_val)
 
 
 if __name__ == '__main__':
