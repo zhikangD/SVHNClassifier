@@ -30,7 +30,7 @@ def _train(path_to_train_tfrecords_file, num_train_examples, path_to_val_tfrecor
         image_batch, length_batch, digits_batch = Donkey.build_batch(path_to_train_tfrecords_file,
                                                                      num_examples=num_train_examples,
                                                                      batch_size=batch_size,
-                                                                     shuffled=True)
+                                                                     shuffled=False)
         length_logtis, digits_logits = Model.inference(image_batch, drop_rate=0.2)
         loss = Model.loss(length_logtis, digits_logits, length_batch, digits_batch)
 
