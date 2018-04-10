@@ -35,15 +35,15 @@ class Donkey(object):
         image, length, digits = Donkey._read_and_decode(filename_queue)
 
         min_queue_examples = int(0.4 * num_examples)
+        print('min_queue_examples  ', min_queue_examples)
         if shuffled:
             image_batch, length_batch, digits_batch = tf.train.shuffle_batch([image, length, digits],
                                                                              batch_size=batch_size,
                                                                              num_threads=1,
-                                                                             # capacity=min_queue_examples + 3 * batch_size,
-                                                                             capacity=32,
+                                                                             capacity=min_queue_examples + 3 * batch_size+1,
 
                                                                              min_after_dequeue=min_queue_examples,
-                                                                             allow_smaller_final_batch=True)
+                                                                             allow_smaller_final_batch=False)
         else:
             image_batch, length_batch, digits_batch = tf.train.batch([image, length, digits],
                                                                      batch_size=batch_size,
